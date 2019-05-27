@@ -1,48 +1,65 @@
 <?php
-	abstract class AbstractGoods{
+
+	abstract class AbstractGoods
+	{
 
 		protected $category;
 
-		protected function __construct($category) {
-			$this->category =   $category;
+		protected function __construct($category)
+		{
+			$this->category = $category;
 		}
 
 		abstract protected function getCategory();
+
 		abstract protected function getPrice();
+
 		abstract protected function getTotalPrice();
+
 		abstract protected function getProfit();
 	}
 
-	class PackagedGoods extends AbstractGoods {
-
+	class PackagedGoods extends AbstractGoods
+	{
 		protected $artNumber;
 		protected $name;
 		public $sellPrice;
 		protected $purchasePrice;
 		protected $discount;
 
-		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount) {
+		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount)
+		{
 			parent::__construct($category);
-			$this->artNumber =      $artNum;
-			$this->name =           $name;
-			$this->purchasePrice =  $purchasePrice;
-			$this->sellPrice =      $sellPrice;
-			$this->discount =       $discount;
+			$this->artNumber = $artNum;
+			$this->name = $name;
+			$this->purchasePrice = $purchasePrice;
+			$this->sellPrice = $sellPrice;
+			$this->discount = $discount;
 		}
-		function getCategory() {
+
+		function getCategory()
+		{
 			return $this->category;
 		}
-		function getPrice() {
+
+		function getPrice()
+		{
 			return $this->price;
 		}
-		function getTotalPrice(){
-			return $totalPrice = ( $this->sellPrice - $this->sellPrice * $this->discount / 100 );
+
+		function getTotalPrice()
+		{
+			return $totalPrice = ($this->sellPrice - $this->sellPrice * $this->discount / 100);
 		}
-		function getProfit() {
-			return $profit = ( $this->getTotalPrice() - $this->purchasePrice );
+
+		function getProfit()
+		{
+			return $profit = ($this->getTotalPrice() - $this->purchasePrice);
 		}
-		function getInfo() {
-			$info  = "кат. {$this->category}; ";
+
+		function getInfo()
+		{
+			$info = "кат. {$this->category}; ";
 			$info .= "арт. {$this->artNumber}; ";
 			$info .= "наим. {$this->name}; ";
 			$info .= "закуп. цена {$this->purchasePrice} руб.; ";
@@ -54,27 +71,37 @@
 		}
 	}
 
-	class Software extends PackagedGoods {
-		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount) {
+	class Software extends PackagedGoods
+	{
+		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount)
+		{
 			parent::__construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount);
 		}
-		function setSellPrice(){
-			return $this->sellPrice = ( parent::sellPrice / 2 );
+
+		function setSellPrice()
+		{
+			return $this->sellPrice = (parent::sellPrice / 2);
 		}
 	}
 
-	class Goods extends PackagedGoods {
+	class Goods extends PackagedGoods
+	{
 		protected $quantity;
 
-		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount, $quantity) {
+		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount, $quantity)
+		{
 			parent::__construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount);
 			$this->quantity = $quantity;
 		}
-		function getTotalPrice(){
-			return $this->totalPrice = $this->quantity * ( $this->sellPrice - $this->sellPrice * $this->discount / 100 );
+
+		function getTotalPrice()
+		{
+			return $this->totalPrice = $this->quantity * ($this->sellPrice - $this->sellPrice * $this->discount / 100);
 		}
-		function getProfit() {
-			return $profit = ( $this->getTotalPrice() - $this->purchasePrice * $this->quantity );
+
+		function getProfit()
+		{
+			return $profit = ($this->getTotalPrice() - $this->purchasePrice * $this->quantity);
 		}
 	}
 
