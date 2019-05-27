@@ -14,13 +14,11 @@
 	}
 
 	class PackagedGoods extends AbstractGoods {
-
 		protected $artNumber;
 		protected $name;
 		public $sellPrice;
 		protected $purchasePrice;
 		protected $discount;
-
 		function __construct($category, $artNum, $name, $purchasePrice, $sellPrice, $discount) {
 			parent::__construct($category);
 			$this->artNumber =      $artNum;
